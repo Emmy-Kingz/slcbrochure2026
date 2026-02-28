@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Leadership Conference 2026 - Industry Brochures</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
@@ -76,11 +75,8 @@
                     <span class="text-sm text-gray-500 border-l border-gray-300 pl-2 ml-2">Brochure Generator</span>
                 </div>
                 <div class="flex space-x-3">
-                    <button onclick="printBrochure()" class="flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg font-medium transition-colors text-sm">
-                        <i class="fas fa-print mr-2"></i> Print
-                    </button>
-                    <button onclick="downloadPDF()" class="flex items-center px-4 py-2 ruby-bg hover:bg-red-700 text-white rounded-lg font-medium transition-colors text-sm shadow-sm">
-                        <i class="fas fa-download mr-2"></i> Download PDF
+                    <button onclick="printBrochure()" class="flex items-center px-4 py-2 ruby-bg hover:bg-red-700 text-white rounded-lg font-medium transition-colors text-sm shadow-sm">
+                        <i class="fas fa-print mr-2"></i> Print Brochure
                     </button>
                 </div>
             </div>
@@ -640,73 +636,6 @@
             window.print();
             // Restore title
             setTimeout(() => { document.title = originalTitle; }, 100);
-        }
-
-        // Download PDF functionality using html2pdf
-        function downloadPDF() {
-            const ind = industries.find(i => i.id === activeIndustryId);
-            const element = document.getElementById('brochure-content');
-            
-            // Temporarily prepare elements for pixel-perfect A4 snapshot
-            const pages = document.querySelectorAll('.brochure-page');
-            pages.forEach(page => {
-                page.style.width = '794px';
-                page.style.height = '1123px';
-                page.style.margin = '0'; 
-                page.style.boxShadow = 'none'; 
-                page.style.borderRadius = '0';
-                page.style.maxWidth = 'none';
-            });
-            
-            const breaks = document.querySelectorAll('.pdf-page-break');
-            breaks.forEach(b => b.style.display = 'none');
-            
-            const originalBg = element.className;
-            element.className = 'bg-white';
-            
-            const opt = {
-                margin:       0,
-                filename:     `SLC_2026_Brochure_${ind.title.replace(/[^a-z0-9]/gi, '_')}.pdf`,
-                image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { 
-                    scale: 2, 
-                    useCORS: true, 
-                    logging: false,
-                    windowWidth: 794,
-                    scrollY: 0
-                },
-                jsPDF:        { unit: 'px', format: [794, 1123], orientation: 'portrait', hotfixes: ["px_scaling"] }
-            };
-
-            // Add loading state to button
-            const btn = document.querySelector('button[onclick="downloadPDF()"]');
-            const originalBtnHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Generating...';
-            btn.disabled = true;
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                // Restore button state
-                btn.innerHTML = originalBtnHTML;
-                btn.disabled = false;
-                
-                // Restore styles
-                element.className = originalBg;
-                pages.forEach(page => {
-                    page.style.width = '';
-                    page.style.height = '';
-                    page.style.margin = '';
-                    page.style.boxShadow = '';
-                    page.style.borderRadius = '';
-                    page.style.maxWidth = '';
-                });
-                breaks.forEach(b => b.style.display = '');
-            }).catch(err => {
-                console.error("PDF Generation Error", err);
-                btn.innerHTML = originalBtnHTML;
-                btn.disabled = false;
-                element.className = originalBg;
-                alert("There was an error generating the PDF. Please try the Print option instead and select 'Save as PDF'.");
-            });
         }
 
         // Initial render
