@@ -89,8 +89,8 @@
                     <span class="text-sm text-gray-500 border-l border-gray-300 pl-2 ml-2">Brochure Generator</span>
                 </div>
                 <div class="flex space-x-3">
-                    <button onclick="printBrochure()" class="flex items-center px-4 py-2 brand-green-bg hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm shadow-sm">
-                        <i class="fas fa-print mr-2"></i> Print Brochure
+                    <button onclick="openDownloadModal()" class="flex items-center px-4 py-2 brand-green-bg hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm shadow-sm">
+                        <i class="fas fa-download mr-2"></i> Download Now
                     </button>
                 </div>
             </div>
@@ -474,6 +474,32 @@
         </div>
     </div>
 
+    <!-- Download Modal -->
+    <div id="download-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center backdrop-blur-sm no-print">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl relative">
+            <button onclick="closeModal('download-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold brand-black-text mb-2 text-center">Download Brochure</h3>
+            <p class="text-sm text-gray-500 mb-6 text-center">Select your industry to download the specific PDF brochure.</p>
+            
+            <div class="flex flex-col space-y-3">
+                <a href="Luxury, Real Estate & Automobile2.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
+                    <i class="fas fa-car text-green-500 mr-3 text-lg w-6 text-center"></i> Luxury, Real Estate & Automobile
+                </a>
+                <a href="B2B, Technology & Oil and Gas1.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
+                    <i class="fas fa-industry text-green-500 mr-3 text-lg w-6 text-center"></i> B2B, Technology & Oil and Gas
+                </a>
+                <button onclick="downloadGeneratedPDF('fmcg')" class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
+                    <i class="fas fa-shopping-cart text-green-500 mr-3 text-lg w-6 text-center"></i> FMCG, Retail & Pharmaceuticals
+                </button>
+                <button onclick="downloadGeneratedPDF('finance')" class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
+                    <i class="fas fa-chart-pie text-green-500 mr-3 text-lg w-6 text-center"></i> Financial Services & Insurance
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Application Logic -->
     <script>
         // Data structure with professionally formatted HTML content
@@ -642,6 +668,15 @@
             updateContent();
         }
 
+        // Modal functionality for Downloads
+        function openDownloadModal() {
+            const modal = document.getElementById('download-modal');
+            if(modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
         // Print functionality
         function printBrochure() {
             // Update document title briefly so the print dialog suggests a good filename
@@ -651,6 +686,17 @@
             window.print();
             // Restore title
             setTimeout(() => { document.title = originalTitle; }, 100);
+        }
+
+        // Auto-Generate the remaining PDFs
+        function downloadGeneratedPDF(id) {
+            closeModal('download-modal'); // Close the pop-up
+            selectIndustry(id);           // Instantly update the HTML to the chosen industry
+            
+            // Wait 300ms for the DOM to update, then trigger the Save As PDF engine
+            setTimeout(() => {
+                printBrochure(); 
+            }, 300);
         }
 
         // Initial render
