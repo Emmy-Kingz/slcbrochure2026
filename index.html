@@ -460,7 +460,7 @@
                     <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-email">Email Address</label>
                     <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" id="inq-email" type="email" required placeholder="john@example.com">
                 </div>
-                <div class="mb-6 sm:mb-8">
+                <div class="mb-3 sm:mb-4">
                     <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-location">Location</label>
                     <div class="relative">
                         <select class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white" id="inq-location" required>
@@ -473,6 +473,10 @@
                             <i class="fas fa-chevron-down text-xs sm:text-sm"></i>
                         </div>
                     </div>
+                </div>
+                <div class="mb-5 sm:mb-6">
+                    <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-message">Your Comments / Inquiries (Optional)</label>
+                    <textarea class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-y h-20 sm:h-24" id="inq-message" placeholder="Type your message here..."></textarea>
                 </div>
                 <button type="submit" class="w-full flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5c] text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md text-sm sm:text-base">
                     <i class="fab fa-whatsapp text-lg sm:text-xl mr-2"></i> Send to WhatsApp
@@ -659,10 +663,16 @@
             const name = document.getElementById('inq-name').value;
             const email = document.getElementById('inq-email').value;
             const location = document.getElementById('inq-location').value;
+            const message = document.getElementById('inq-message').value;
             
             // Format WhatsApp message with country code for 08109006065
             const phoneNumber = '2348109006065';
-            const text = `Hello! I have an inquiry regarding the Sales Leadership Conference 2026.%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Location:* ${location}`;
+            let text = `Hello! I have an inquiry regarding the Sales Leadership Conference 2026.%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Location:* ${location}`;
+            
+            if (message.trim() !== '') {
+                // Encode the message to ensure newlines and special characters are handled by WhatsApp
+                text += `%0A*Message:* ${encodeURIComponent(message)}`;
+            }
             
             // Open WhatsApp in a new tab to initiate chat
             window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
