@@ -12,19 +12,24 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .brochure-page {
             background: white;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             margin-bottom: 2rem;
-            padding: 3rem;
+            padding: 1.5rem; /* App-like mobile padding */
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+            .brochure-page { padding: 3rem; } /* Desktop spacious padding */
         }
 
         /* Updated Theme Colors: Green, White, Black */
@@ -76,6 +81,10 @@
         .pdf-page-break {
             page-break-before: always;
         }
+
+        /* Hide Scrollbar Utilities */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -86,55 +95,53 @@
             <div class="flex flex-col md:flex-row justify-between items-center py-4">
                 <div class="flex items-center mb-4 md:mb-0">
                     <div class="text-2xl font-black brand-black-text tracking-tighter mr-2">Sales<span class="brand-green-text">Ruby</span></div>
-                    <span class="text-sm text-gray-500 border-l border-gray-300 pl-2 ml-2">Brochure Generator</span>
+                    <span class="text-sm text-gray-500 border-l border-gray-300 pl-2 ml-2 hidden sm:inline">Brochure Generator</span>
                 </div>
-                <div class="flex space-x-3">
-                    <button onclick="openDownloadModal()" class="flex items-center px-4 py-2 brand-green-bg hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-sm shadow-sm">
+                <div class="flex space-x-2 sm:space-x-3 w-full md:w-auto justify-center">
+                    <button onclick="openPaginatedView()" class="flex-1 md:flex-none flex justify-center items-center px-3 sm:px-4 py-2 bg-gray-100 hover:bg-gray-200 brand-black-text rounded-lg font-medium transition-colors text-xs sm:text-sm shadow-sm border border-gray-300">
+                        <i class="fas fa-layer-group mr-2"></i> View Pages
+                    </button>
+                    <button onclick="openDownloadModal()" class="flex-1 md:flex-none flex justify-center items-center px-3 sm:px-4 py-2 brand-green-bg hover:bg-green-700 text-white rounded-lg font-medium transition-colors text-xs sm:text-sm shadow-sm">
                         <i class="fas fa-download mr-2"></i> Download Now
                     </button>
                 </div>
-            </div>
-            
-            <!-- Industry Tabs -->
-            <div class="flex overflow-x-auto hide-scrollbar pb-2" id="tabs-container">
-                <!-- Tabs rendered via JS -->
             </div>
         </div>
     </div>
 
     <!-- Brochure Content Area -->
-    <div id="brochure-content" class="py-8 bg-gray-100 print:bg-white print:py-0">
+    <div id="brochure-content" class="py-4 md:py-8 bg-gray-100 print:bg-white print:py-0">
         
         <!-- PAGE 1: COVER -->
-        <div class="brochure-page flex flex-col justify-center min-h-[1123px] relative">
+        <div class="brochure-page flex flex-col justify-center min-h-[90vh] md:min-h-[1123px] relative">
             <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center z-0"></div>
             <div class="absolute inset-0 gradient-overlay z-10"></div>
             
-            <div class="relative z-20 text-white px-8 md:px-16 text-center md:text-left">
-                <h3 class="text-xl md:text-2xl font-bold tracking-widest uppercase mb-4 text-gray-200">Sales Leadership Conference 2026</h3>
-                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">Selling <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">VALUE</span> <br>at Scale</h1>
-                <p class="text-2xl md:text-3xl font-light mb-12 italic border-l-4 border-green-500 pl-4">Achieving 5X!</p>
+            <div class="relative z-20 text-white px-4 sm:px-8 md:px-16 text-center md:text-left mt-8 md:mt-0">
+                <h3 class="text-lg md:text-2xl font-bold tracking-widest uppercase mb-4 text-gray-200">Sales Leadership Conference 2026</h3>
+                <h1 class="text-4xl sm:text-5xl md:text-7xl font-black mb-6 leading-tight">Selling <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">VALUE</span> <br>at Scale</h1>
+                <p class="text-xl md:text-3xl font-light mb-10 italic border-l-4 border-green-500 pl-4">Achieving 5X!</p>
                 
-                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-xl inline-block mb-12">
-                    <p class="text-xl font-bold mb-2">Designed for Leaders Who Must Win in Hard Markets</p>
+                <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 sm:p-6 rounded-xl inline-block mb-10">
+                    <p class="text-lg sm:text-xl font-bold mb-2">Designed for Leaders Who Must Win in Hard Markets</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 border-t border-white/20 pt-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4 border-t border-white/20 pt-8">
                     <div>
-                        <h4 class="text-green-400 font-bold uppercase tracking-wider text-sm mb-1">Lagos Session</h4>
-                        <p class="text-2xl font-bold mb-1">May 01, 2026</p>
-                        <p class="text-gray-300">Lilygate Hotel, Lekki Phase 1</p>
+                        <h4 class="text-green-400 font-bold uppercase tracking-wider text-xs sm:text-sm mb-1">Lagos Session</h4>
+                        <p class="text-xl sm:text-2xl font-bold mb-1">May 01, 2026</p>
+                        <p class="text-sm sm:text-base text-gray-300">Lilygate Hotel, Lekki Phase 1</p>
                     </div>
                     <div>
-                        <h4 class="text-green-400 font-bold uppercase tracking-wider text-sm mb-1">Abuja Session</h4>
-                        <p class="text-2xl font-bold mb-1">May 21, 2026</p>
-                        <p class="text-gray-300">Transcorp Hilton (TBC)</p>
+                        <h4 class="text-green-400 font-bold uppercase tracking-wider text-xs sm:text-sm mb-1">Abuja Session</h4>
+                        <p class="text-xl sm:text-2xl font-bold mb-1">May 21, 2026</p>
+                        <p class="text-sm sm:text-base text-gray-300">Transcorp Hilton (TBC)</p>
                     </div>
                 </div>
 
-                <div class="mt-16 text-center md:text-left">
-                    <p class="text-sm text-gray-400 uppercase tracking-widest mb-2">Hosted by</p>
-                    <div class="text-3xl font-black text-white tracking-tighter">Sales<span class="text-green-500">Ruby</span></div>
+                <div class="mt-12 md:mt-16 text-center md:text-left">
+                    <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-widest mb-1">Hosted by</p>
+                    <div class="text-2xl sm:text-3xl font-black text-white tracking-tighter">Sales<span class="text-green-500">Ruby</span></div>
                 </div>
             </div>
         </div>
@@ -142,58 +149,58 @@
         <div class="pdf-page-break no-print"></div>
 
         <!-- PAGE 2: WHY & WHO -->
-        <div class="brochure-page min-h-[1123px] flex flex-col">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 print-compact-gap flex-grow">
+        <div class="brochure-page min-h-screen md:min-h-[1123px] flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 print-compact-gap flex-grow">
                 
                 <!-- Why Attend -->
                 <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-1 brand-green-bg mr-4"></div>
-                        <h2 class="text-3xl font-black brand-black-text uppercase">Why Attend?</h2>
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <div class="w-10 sm:w-12 h-1 brand-green-bg mr-3 sm:mr-4"></div>
+                        <h2 class="text-2xl sm:text-3xl font-black brand-black-text uppercase">Why Attend?</h2>
                     </div>
-                    <div class="space-y-4 text-lg text-gray-700 font-medium mb-8 print-compact-mb">
-                        <p class="flex items-center"><i class="fas fa-arrow-right text-green-500 mr-3"></i> Markets have shifted.</p>
-                        <p class="flex items-center"><i class="fas fa-arrow-right text-green-500 mr-3"></i> Customers are more informed.</p>
-                        <p class="flex items-center"><i class="fas fa-arrow-right text-green-500 mr-3"></i> Buying cycles are longer.</p>
-                        <p class="flex items-center"><i class="fas fa-arrow-right text-green-500 mr-3"></i> Trust is harder to earn.</p>
-                        <p class="flex items-center"><i class="fas fa-arrow-right text-green-500 mr-3"></i> And growth is no longer guaranteed.</p>
+                    <div class="space-y-3 sm:space-y-4 text-base sm:text-lg text-gray-700 font-medium mb-6 print-compact-mb">
+                        <p class="flex items-start"><i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i> <span>Markets have shifted.</span></p>
+                        <p class="flex items-start"><i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i> <span>Customers are more informed.</span></p>
+                        <p class="flex items-start"><i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i> <span>Buying cycles are longer.</span></p>
+                        <p class="flex items-start"><i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i> <span>Trust is harder to earn.</span></p>
+                        <p class="flex items-start"><i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i> <span>And growth is no longer guaranteed.</span></p>
                     </div>
-                    <p class="text-xl font-bold brand-black-text mb-6 print-compact-mb">Any salesman who would win must do things differently.</p>
-                    <p class="text-gray-600 leading-relaxed mb-6 print-compact-mb">
+                    <p class="text-lg sm:text-xl font-bold brand-black-text mb-4 print-compact-mb">Any salesman who would win must do things differently.</p>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 print-compact-mb">
                         The Sales Leadership Conference is a high-impact, practical, and strategic gathering for sales leaders who must deliver results across complex, competitive, and fast-changing industries.
                     </p>
-                    <div class="bg-gray-100 border-l-4 border-green-600 p-4">
+                    <div class="bg-gray-100 border-l-4 border-green-600 p-3 sm:p-4 text-sm sm:text-base">
                         <p class="font-bold brand-black-text">This is not motivation. This is modern sales leadership, built for Africa's realities.</p>
                     </div>
                 </div>
 
                 <!-- Who Should Attend -->
-                <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 flex flex-col justify-center">
-                    <h2 class="text-2xl font-black brand-black-text uppercase mb-6 text-center border-b pb-4">Who Should Attend</h2>
-                    <p class="text-center text-gray-600 mb-8 print-compact-mb italic">Senior and mid-level sales leaders with 2 or more years experience.</p>
+                <div class="bg-gray-50 p-6 sm:p-8 rounded-xl border border-gray-200 flex flex-col justify-center">
+                    <h2 class="text-xl sm:text-2xl font-black brand-black-text uppercase mb-4 sm:mb-6 text-center border-b pb-3 sm:pb-4">Who Should Attend</h2>
+                    <p class="text-center text-sm sm:text-base text-gray-600 mb-6 print-compact-mb italic">Senior and mid-level sales leaders with 2 or more years experience.</p>
                     
-                    <div class="text-center mb-8 print-compact-mb">
-                        <div class="inline-block bg-white shadow-sm border border-gray-200 rounded-lg px-6 py-4">
-                            <h3 class="text-xl font-bold brand-green-text mb-2" id="target-industry-title">Luxury & Real Estate</h3>
-                            <p class="text-gray-700 font-medium" id="target-industry-desc">HNI Sales, High-end Automotive & Property</p>
+                    <div class="text-center mb-6 print-compact-mb">
+                        <div class="inline-block bg-white shadow-sm border border-gray-200 rounded-lg px-4 sm:px-6 py-3 sm:py-4 w-full sm:w-auto">
+                            <h3 class="text-lg sm:text-xl font-bold brand-green-text mb-1 sm:mb-2" id="target-industry-title">Luxury & Real Estate</h3>
+                            <p class="text-sm sm:text-base text-gray-700 font-medium" id="target-industry-desc">HNI Sales, High-end Automotive & Property</p>
                         </div>
                     </div>
 
-                    <div class="text-center brand-black-bg text-white p-6 rounded-lg mt-auto shadow-md">
-                        <i class="fas fa-bullseye text-3xl text-green-500 mb-3"></i>
-                        <p class="font-semibold text-lg">If you lead people, manage numbers, or influence revenue—this one is for you.</p>
+                    <div class="text-center brand-black-bg text-white p-5 sm:p-6 rounded-lg mt-auto shadow-md">
+                        <i class="fas fa-bullseye text-2xl sm:text-3xl text-green-500 mb-2 sm:mb-3"></i>
+                        <p class="font-semibold text-sm sm:text-lg">If you lead people, manage numbers, or influence revenue—this one is for you.</p>
                     </div>
                 </div>
             </div>
             
             <!-- What makes this different -->
-            <div class="mt-12 print:mt-8 bg-white border border-gray-200 p-6 rounded-xl shadow-sm">
-                <h3 class="text-lg font-bold brand-black-text mb-4 text-center">What Makes This Conference Different?</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-700">
-                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> Designed for the Nigerian market and today's realities</div>
-                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> Combines strategy, psychology, and execution</div>
-                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> Balances sales excellence and leadership sustainability</div>
-                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> Designed for immediate application, not just note-taking</div>
+            <div class="mt-8 print:mt-8 bg-white border border-gray-200 p-5 sm:p-6 rounded-xl shadow-sm">
+                <h3 class="text-base sm:text-lg font-bold brand-black-text mb-4 text-center">What Makes This Conference Different?</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 text-xs sm:text-sm text-gray-700">
+                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Designed for the Nigerian market and today's realities</span></div>
+                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Combines strategy, psychology, and execution</span></div>
+                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Balances sales excellence and leadership sustainability</span></div>
+                    <div class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Designed for immediate application, not just note-taking</span></div>
                 </div>
             </div>
         </div>
@@ -201,81 +208,81 @@
         <div class="pdf-page-break no-print"></div>
 
         <!-- PAGE 3: WHAT YOU WILL LEARN & COHORTS -->
-        <div class="brochure-page min-h-[1123px] flex flex-col justify-between">
+        <div class="brochure-page min-h-screen md:min-h-[1123px] flex flex-col justify-between">
             <div>
-                <h2 class="text-3xl font-black brand-black-text uppercase mb-6 text-center">What You Will Learn</h2>
+                <h2 class="text-2xl sm:text-3xl font-black brand-black-text uppercase mb-6 text-center">What You Will Learn</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 print-compact-mb print-compact-gap">
-                    <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
-                        <div class="flex items-center mb-3">
-                            <div class="w-10 h-10 rounded-full brand-black-bg flex items-center justify-center text-white mr-4"><i class="fas fa-users"></i></div>
-                            <h3 class="text-xl font-bold brand-black-text">For Sales People</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-8 print-compact-mb print-compact-gap">
+                    <div class="bg-white border border-gray-200 p-4 sm:p-5 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-2 sm:mb-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full brand-black-bg flex items-center justify-center text-white mr-3 sm:mr-4 flex-shrink-0"><i class="fas fa-users text-sm sm:text-base"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold brand-black-text">For Sales People</h3>
                         </div>
-                        <p class="text-gray-600 text-sm">Practical ways to find, engage and close customers faster, effectively and sustainably.</p>
+                        <p class="text-gray-600 text-xs sm:text-sm">Practical ways to find, engage and close customers faster, effectively and sustainably.</p>
                     </div>
-                    <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
-                        <div class="flex items-center mb-3">
-                            <div class="w-10 h-10 rounded-full brand-green-bg flex items-center justify-center text-white mr-4"><i class="fas fa-chart-line"></i></div>
-                            <h3 class="text-xl font-bold brand-black-text">For Sales Leaders</h3>
+                    <div class="bg-white border border-gray-200 p-4 sm:p-5 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-2 sm:mb-3">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full brand-green-bg flex items-center justify-center text-white mr-3 sm:mr-4 flex-shrink-0"><i class="fas fa-chart-line text-sm sm:text-base"></i></div>
+                            <h3 class="text-lg sm:text-xl font-bold brand-black-text">For Sales Leaders</h3>
                         </div>
-                        <p class="text-gray-600 text-sm">How elite sales leaders are delivering consistent growth without burning out their people or damaging trust.</p>
+                        <p class="text-gray-600 text-xs sm:text-sm">How elite sales leaders are delivering consistent growth without burning out their people or damaging trust.</p>
                     </div>
                 </div>
 
-                <div class="mb-8 print-compact-mb">
-                    <h3 class="text-xl font-bold brand-black-text mb-4 border-b pb-2">Key Plenary Sessions</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 print-compact-gap">
+                <div class="mb-6 sm:mb-8 print-compact-mb">
+                    <h3 class="text-lg sm:text-xl font-bold brand-black-text mb-3 sm:mb-4 border-b pb-2">Key Plenary Sessions</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-3 sm:gap-y-4 print-compact-gap">
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> The 5X Consultant</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">How modern sales leaders shift from selling to trusted advisory becoming indispensable to customers.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>The 5X Consultant</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">How modern sales leaders shift from selling to trusted advisory becoming indispensable to customers.</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> Shifting to Outcomes</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">Why buyers no longer pay for features and how to reposition your value.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Shifting to Outcomes</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">Why buyers no longer pay for features and how to reposition your value.</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> Disciplined Execution</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">What separates high performers from consistent winners in sales.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Disciplined Execution</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">What separates high performers from consistent winners in sales.</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> Scaling Without Burnout</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">How leaders drive performance while managing energy, morale, and outcomes.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Scaling Without Burnout</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">How leaders drive performance while managing energy, morale, and outcomes.</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> Adapting to Customers</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">Understanding new buying behaviors across sectors and meeting them half-way.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Adapting to Customers</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">Understanding new buying behaviors across sectors and meeting them half-way.</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-gray-800 flex items-center"><i class="fas fa-star text-green-500 mr-2"></i> Winning From Within</h4>
-                            <p class="text-xs text-gray-600 mt-1 pl-6">Why internal alignment, mindset, and leadership discipline determine external success.</p>
+                            <h4 class="font-bold text-gray-800 flex items-start text-sm sm:text-base"><i class="fas fa-star text-green-500 mt-1 mr-2 flex-shrink-0"></i> <span>Winning From Within</span></h4>
+                            <p class="text-[11px] sm:text-xs text-gray-600 mt-1 pl-6">Why internal alignment, mindset, and leadership discipline determine external success.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Dynamic Deep Dive Section -->
-                <div class="bg-gray-50 border-l-4 border-green-500 p-6 rounded-r-xl shadow-inner mb-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-black brand-black-text">Deep-Dive Industry Cohorts</h3>
-                        <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Practical & Role-Based</span>
+                <div class="bg-gray-50 border-l-4 border-green-500 p-4 sm:p-6 rounded-r-xl shadow-inner mb-4 sm:mb-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-2">
+                        <h3 class="text-lg sm:text-xl font-black brand-black-text">Deep-Dive Industry Cohorts</h3>
+                        <span class="bg-green-100 text-green-800 text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">Practical & Role-Based</span>
                     </div>
                     
-                    <h4 class="text-lg font-bold text-gray-800 mb-3" id="cohort-title">Industry Name</h4>
+                    <h4 class="text-base sm:text-lg font-bold text-gray-800 mb-2 sm:mb-3" id="cohort-title">Industry Name</h4>
                     
-                    <ul class="space-y-2 mb-4 text-sm" id="cohort-bullets">
+                    <ul class="space-y-2 mb-4 text-xs sm:text-sm" id="cohort-bullets">
                         <!-- Dynamic Bullets -->
                     </ul>
                     
-                    <p class="text-gray-700 leading-relaxed text-sm bg-white p-4 rounded border border-gray-200 shadow-sm" id="cohort-paragraph">
+                    <p class="text-gray-700 leading-relaxed text-xs sm:text-sm bg-white p-3 sm:p-4 rounded border border-gray-200 shadow-sm" id="cohort-paragraph">
                         <!-- Dynamic Paragraph -->
                     </p>
                 </div>
             </div>
 
             <!-- Certification Bundle Notice -->
-            <div class="brand-black-bg text-white p-5 rounded-xl text-sm leading-relaxed text-center relative overflow-hidden mt-auto">
-                <div class="absolute -right-10 -top-10 opacity-10 text-9xl"><i class="fas fa-certificate text-white"></i></div>
+            <div class="brand-black-bg text-white p-4 sm:p-5 rounded-xl text-xs sm:text-sm leading-relaxed text-center relative overflow-hidden mt-auto">
+                <div class="absolute -right-6 -top-6 sm:-right-10 sm:-top-10 opacity-10 text-7xl sm:text-9xl"><i class="fas fa-certificate text-white"></i></div>
                 <p class="relative z-10 font-medium">The Sales Leadership Conference has been intentionally bundled with our proprietary consultative selling program called <strong>Fundamentals of Selling Program (FSP)</strong> delivered on our Global Sales University (GSU) platform.</p>
-                <div class="mt-3 inline-block bg-white brand-black-text px-4 py-2 rounded font-bold relative z-10 text-xs">
+                <div class="mt-3 inline-block bg-white brand-black-text px-3 py-1 sm:px-4 sm:py-2 rounded font-bold relative z-10 text-[10px] sm:text-xs">
                     Online Learning Starts: March 4
                 </div>
             </div>
@@ -284,133 +291,133 @@
         <div class="pdf-page-break no-print"></div>
 
         <!-- PAGE 4: AGENDA, SPEAKERS & PRICING -->
-        <div class="brochure-page min-h-[1123px]">
+        <div class="brochure-page min-h-screen md:min-h-[1123px]">
             
             <!-- Faculty -->
-            <h2 class="text-xl font-black brand-black-text uppercase mb-4 border-b pb-2">Faculty & Facilitators</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-center">
+            <h2 class="text-lg sm:text-xl font-black brand-black-text uppercase mb-3 sm:mb-4 border-b pb-2">Faculty & Facilitators</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6 text-center">
                 <div>
-                    <div class="w-16 h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-green-500 shadow-sm flex items-center justify-center text-gray-400 text-xl">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-green-500 shadow-sm flex items-center justify-center text-gray-400 text-lg sm:text-xl">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h4 class="font-bold brand-black-text text-xs">BUNMI JEMBOLA</h4>
-                    <p class="text-[10px] text-gray-500">CEO, SALESRUBY (HOST)</p>
+                    <h4 class="font-bold brand-black-text text-[10px] sm:text-xs">BUNMI JEMBOLA</h4>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500">CEO, SALESRUBY (HOST)</p>
                 </div>
                 <div>
-                    <div class="w-16 h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-xl">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-lg sm:text-xl">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h4 class="font-bold brand-black-text text-xs">TAYO OLATUNJI</h4>
-                    <p class="text-[10px] text-gray-500">BUSINESS EXEC, NESTLE NG</p>
+                    <h4 class="font-bold brand-black-text text-[10px] sm:text-xs">TAYO OLATUNJI</h4>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500">BUSINESS EXEC, NESTLE NG</p>
                 </div>
                 <div>
-                    <div class="w-16 h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-xl">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-lg sm:text-xl">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h4 class="font-bold brand-black-text text-xs">KEHINDE OGUNDARE</h4>
-                    <p class="text-[10px] text-gray-500">REGIONAL MGR, ZOHO</p>
+                    <h4 class="font-bold brand-black-text text-[10px] sm:text-xs">KEHINDE OGUNDARE</h4>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500">REGIONAL MGR, ZOHO</p>
                 </div>
                 <div>
-                    <div class="w-16 h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-xl">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gray-200 mb-2 overflow-hidden border-2 border-gray-800 shadow-sm flex items-center justify-center text-gray-400 text-lg sm:text-xl">
                         <i class="fas fa-user-tie"></i>
                     </div>
-                    <h4 class="font-bold brand-black-text text-xs">STEPHEN ASISHANA</h4>
-                    <p class="text-[10px] text-gray-500">HEAD OF SALES, IT HORIZONS</p>
+                    <h4 class="font-bold brand-black-text text-[10px] sm:text-xs">STEPHEN ASISHANA</h4>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500">HEAD OF SALES, IT HORIZONS</p>
                 </div>
             </div>
 
             <!-- Dynamic Agenda Table -->
-            <h2 class="text-xl font-black brand-black-text uppercase mb-3 border-b pb-2">Conference Agenda</h2>
-            <div class="overflow-hidden rounded-lg border border-gray-200 mb-6 shadow-sm">
-                <table class="min-w-full text-left text-xs sm:text-sm font-light">
+            <h2 class="text-lg sm:text-xl font-black brand-black-text uppercase mb-2 sm:mb-3 border-b pb-2">Conference Agenda</h2>
+            <div class="overflow-x-auto rounded-lg border border-gray-200 mb-5 sm:mb-6 shadow-sm">
+                <table class="min-w-full text-left text-[10px] sm:text-sm font-light">
                     <thead class="border-b brand-black-bg text-white font-medium">
                         <tr>
-                            <th scope="col" class="px-4 py-3 w-1/4 text-xs">Time</th>
-                            <th scope="col" class="px-4 py-3 w-1/4 text-xs">Format</th>
-                            <th scope="col" class="px-4 py-3 w-1/2 text-xs" id="agenda-table-header">Topic (Luxury, Real Estate & Automobile)</th>
+                            <th scope="col" class="px-3 py-2 sm:px-4 sm:py-3 w-1/5 text-[10px] sm:text-xs">Time</th>
+                            <th scope="col" class="px-3 py-2 sm:px-4 sm:py-3 w-1/5 text-[10px] sm:text-xs">Format</th>
+                            <th scope="col" class="px-3 py-2 sm:px-4 sm:py-3 w-3/5 text-[10px] sm:text-xs" id="agenda-table-header">Topic (Luxury, Real Estate & Automobile)</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white">
-                        <tr class="border-b bg-gray-50"><td class="whitespace-nowrap px-4 py-2 font-medium">8:00 - 9:00</td><td class="px-4 py-2 text-gray-600">Plenary</td><td class="px-4 py-2 font-semibold text-gray-800">The 5X Consultant</td></tr>
-                        <tr class="border-b"><td class="whitespace-nowrap px-4 py-2 font-medium">9:00 - 10:00</td><td class="px-4 py-2 text-gray-600">Plenary</td><td class="px-4 py-2 font-semibold text-gray-800">Shifting from Selling Products to Selling Outcomes</td></tr>
-                        <tr class="border-b bg-gray-100"><td class="whitespace-nowrap px-4 py-2 font-medium">10:00 - 10:30</td><td class="px-4 py-2 text-gray-600" colspan="2"><i class="fas fa-coffee mr-2 text-gray-600"></i> Tea Break</td></tr>
+                        <tr class="border-b bg-gray-50"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">8:00 - 9:00</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top">Plenary</td><td class="px-3 py-2 sm:px-4 font-semibold text-gray-800 align-top">The 5X Consultant</td></tr>
+                        <tr class="border-b"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">9:00 - 10:00</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top">Plenary</td><td class="px-3 py-2 sm:px-4 font-semibold text-gray-800 align-top">Shifting from Selling Products to Selling Outcomes</td></tr>
+                        <tr class="border-b bg-gray-100"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">10:00 - 10:30</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top" colspan="2"><i class="fas fa-coffee mr-2 text-gray-600"></i> Tea Break</td></tr>
                         
                         <!-- Dynamic Cohort Rows -->
-                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="whitespace-nowrap px-4 py-2 font-medium">10:30 - 11:30</td><td class="px-4 py-2 text-green-700 font-bold">Industry Cohort</td><td class="px-4 py-2 font-bold text-gray-900" id="agenda-1030">Building trust with Ultra HNIs</td></tr>
-                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="whitespace-nowrap px-4 py-2 font-medium">11:30 - 12:30</td><td class="px-4 py-2 text-green-700 font-bold">Industry Cohort</td><td class="px-4 py-2 font-bold text-gray-900" id="agenda-1130">Effective Prospecting Strategies for Qualified Real Estate Buyers</td></tr>
-                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="whitespace-nowrap px-4 py-2 font-medium">12:30 - 1:20</td><td class="px-4 py-2 text-green-700 font-bold">Cohort (Role Play)</td><td class="px-4 py-2 font-bold text-gray-900" id="agenda-1230">Handling most common real estate objections and closing</td></tr>
+                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">10:30 - 11:30</td><td class="px-3 py-2 sm:px-4 text-green-700 font-bold align-top">Industry Cohort</td><td class="px-3 py-2 sm:px-4 font-bold text-gray-900 align-top" id="agenda-1030">Building trust with Ultra HNIs</td></tr>
+                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">11:30 - 12:30</td><td class="px-3 py-2 sm:px-4 text-green-700 font-bold align-top">Industry Cohort</td><td class="px-3 py-2 sm:px-4 font-bold text-gray-900 align-top" id="agenda-1130">Effective Prospecting Strategies for Qualified Real Estate Buyers</td></tr>
+                        <tr class="border-b border-l-4 border-green-500 bg-green-50"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">12:30 - 1:20</td><td class="px-3 py-2 sm:px-4 text-green-700 font-bold align-top">Cohort (Role Play)</td><td class="px-3 py-2 sm:px-4 font-bold text-gray-900 align-top" id="agenda-1230">Handling most common real estate objections and closing</td></tr>
                         
-                        <tr class="border-b bg-gray-100"><td class="whitespace-nowrap px-4 py-2 font-medium">1:30 - 2:20</td><td class="px-4 py-2 text-gray-600" colspan="2"><i class="fas fa-utensils mr-2 text-gray-600"></i> Lunch & Networking</td></tr>
+                        <tr class="border-b bg-gray-100"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">1:30 - 2:20</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top" colspan="2"><i class="fas fa-utensils mr-2 text-gray-600"></i> Lunch & Networking</td></tr>
                         
-                        <tr class="border-b"><td class="whitespace-nowrap px-4 py-2 font-medium align-top" rowspan="2">2:30 - 3:15</td><td class="px-4 py-2 text-gray-800 font-medium">Sales People</td><td class="px-4 py-2 text-gray-800">The Science of Disciplined Execution</td></tr>
-                        <tr class="border-b"><td class="px-4 py-2 text-gray-600 font-medium bg-gray-50 border-t border-gray-100">Leaders</td><td class="px-4 py-2 text-gray-800 bg-gray-50 border-t border-gray-100">Scaling Sales Without Burning Out Your People & Managing for Outcome</td></tr>
+                        <tr class="border-b"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]" rowspan="2">2:30 - 3:15</td><td class="px-3 py-2 sm:px-4 text-gray-800 font-medium align-top">Sales People</td><td class="px-3 py-2 sm:px-4 text-gray-800 align-top">The Science of Disciplined Execution</td></tr>
+                        <tr class="border-b"><td class="px-3 py-2 sm:px-4 text-gray-600 font-medium bg-gray-50 border-t border-gray-100 align-top">Leaders</td><td class="px-3 py-2 sm:px-4 text-gray-800 bg-gray-50 border-t border-gray-100 align-top">Scaling Sales Without Burning Out Your People & Managing for Outcome</td></tr>
                         
-                        <tr class="border-b"><td class="whitespace-nowrap px-4 py-2 font-medium">3:15 - 4:00</td><td class="px-4 py-2 text-gray-600" colspan="2"><i class="fas fa-gamepad mr-2 text-green-600"></i> Games & Activities</td></tr>
-                        <tr class="border-b bg-gray-50"><td class="whitespace-nowrap px-4 py-2 font-medium">4:00 - 4:40</td><td class="px-4 py-2 text-gray-600">Plenary</td><td class="px-4 py-2 font-semibold text-gray-800">How Your Customers Are Changing - How to Meet Them Half-Way</td></tr>
-                        <tr class="border-b"><td class="whitespace-nowrap px-4 py-2 font-medium">4:40 - 5:30</td><td class="px-4 py-2 text-gray-600">Plenary</td><td class="px-4 py-2 font-semibold text-gray-800">Winning from Within</td></tr>
-                        <tr class="brand-black-bg text-white"><td class="whitespace-nowrap px-4 py-2 font-medium">5:30 - 6:00</td><td class="px-4 py-2 text-gray-300" colspan="2">Closing Ceremony</td></tr>
+                        <tr class="border-b"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">3:15 - 4:00</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top" colspan="2"><i class="fas fa-gamepad mr-2 text-green-600"></i> Games & Activities</td></tr>
+                        <tr class="border-b bg-gray-50"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">4:00 - 4:40</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top">Plenary</td><td class="px-3 py-2 sm:px-4 font-semibold text-gray-800 align-top">How Your Customers Are Changing - How to Meet Them Half-Way</td></tr>
+                        <tr class="border-b"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">4:40 - 5:30</td><td class="px-3 py-2 sm:px-4 text-gray-600 align-top">Plenary</td><td class="px-3 py-2 sm:px-4 font-semibold text-gray-800 align-top">Winning from Within</td></tr>
+                        <tr class="brand-black-bg text-white"><td class="px-3 py-2 sm:px-4 font-medium align-top min-w-[75px]">5:30 - 6:00</td><td class="px-3 py-2 sm:px-4 text-gray-300 align-top" colspan="2">Closing Ceremony</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <!-- Pricing Section -->
             <div class="print-break-inside-avoid">
-                <h2 class="text-xl font-black brand-black-text uppercase mb-3 text-center">Cost of Participation</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <h2 class="text-lg sm:text-xl font-black brand-black-text uppercase mb-2 sm:mb-3 text-center">Cost of Participation</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                     <!-- Gold Pass -->
                     <div class="border border-gray-300 rounded-xl overflow-hidden shadow-sm flex flex-col">
                         <div class="bg-gray-200 text-center py-2 border-b border-gray-300">
-                            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-widest">Gold Pass</h3>
+                            <h3 class="text-xs sm:text-sm font-bold text-gray-800 uppercase tracking-widest">Gold Pass</h3>
                         </div>
-                        <div class="p-4 bg-white flex-grow">
-                            <div class="text-center mb-3">
-                                <p class="text-xs text-gray-500 line-through">Standard: ₦205,000</p>
-                                <p class="text-xl font-black text-gray-900 mt-1">Early Bird: ₦175,000</p>
+                        <div class="p-3 sm:p-4 bg-white flex-grow">
+                            <div class="text-center mb-2 sm:mb-3">
+                                <p class="text-[10px] sm:text-xs text-gray-500 line-through">Standard: ₦205,000</p>
+                                <p class="text-lg sm:text-xl font-black text-gray-900 mt-1">Early Bird: ₦175,000</p>
                             </div>
-                            <ul class="space-y-1 text-xs text-gray-700">
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Access to all physical sessions</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> 1-Month Online Training on GSU</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Gold Conference Materials</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Executive Networking Access</li>
+                            <ul class="space-y-1 text-[10px] sm:text-xs text-gray-700">
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Access to all physical sessions</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>1-Month Online Training on GSU</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Gold Conference Materials</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Executive Networking Access</span></li>
                             </ul>
                         </div>
                     </div>
                     <!-- Ruby Pass -->
-                    <div class="border border-green-500 rounded-xl overflow-hidden shadow-md relative flex flex-col transform md:-translate-y-1">
-                        <div class="absolute top-0 right-0 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">RECOMMENDED</div>
+                    <div class="border border-green-500 rounded-xl overflow-hidden shadow-md relative flex flex-col transform sm:-translate-y-1">
+                        <div class="absolute top-0 right-0 bg-green-500 text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-bl-lg">RECOMMENDED</div>
                         <div class="brand-green-bg text-center py-2 border-b border-green-600">
-                            <h3 class="text-sm font-bold text-white uppercase tracking-widest">Ruby Pass</h3>
+                            <h3 class="text-xs sm:text-sm font-bold text-white uppercase tracking-widest">Ruby Pass</h3>
                         </div>
-                        <div class="p-4 bg-white flex-grow">
-                            <div class="text-center mb-3">
-                                <p class="text-xs text-gray-500 line-through">Standard: ₦260,000</p>
-                                <p class="text-xl font-black brand-green-text mt-1">Early Bird: ₦220,000</p>
+                        <div class="p-3 sm:p-4 bg-white flex-grow">
+                            <div class="text-center mb-2 sm:mb-3">
+                                <p class="text-[10px] sm:text-xs text-gray-500 line-through">Standard: ₦260,000</p>
+                                <p class="text-lg sm:text-xl font-black brand-green-text mt-1">Early Bird: ₦220,000</p>
                             </div>
-                            <ul class="space-y-1 text-xs text-gray-700">
-                                <li class="flex items-start font-bold"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> All Benefits in Gold Pass</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Priority Front-Row Seating</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Access to full event recordings</li>
-                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2"></i> Special Executive Packs</li>
+                            <ul class="space-y-1 text-[10px] sm:text-xs text-gray-700">
+                                <li class="flex items-start font-bold"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>All Benefits in Gold Pass</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Priority Front-Row Seating</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Access to full event recordings</span></li>
+                                <li class="flex items-start"><i class="fas fa-check text-green-500 mt-0.5 mr-2 flex-shrink-0"></i> <span>Special Executive Packs</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center bg-gray-100 py-2 rounded-lg border border-gray-200 text-xs font-semibold text-gray-800 mb-4">
+                <div class="text-center bg-gray-100 py-2 rounded-lg border border-gray-200 text-[10px] sm:text-xs font-semibold text-gray-800 mb-3 sm:mb-4">
                     Corporate Discounts: 5-9 Delegates: 10% Off | 10+ Delegates: 15% Off
                 </div>
 
-                <div class="brand-black-bg text-white rounded-xl p-4 text-center shadow-lg">
-                    <h3 class="text-lg font-bold mb-2">Are You Interested in SLC2026?</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-medium">
+                <div class="brand-black-bg text-white rounded-xl p-3 sm:p-4 text-center shadow-lg">
+                    <h3 class="text-base sm:text-lg font-bold mb-2">Are You Interested in SLC2026?</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[10px] sm:text-xs font-medium">
                         <a href="https://www.salesruby.com/SLC2026" target="_blank" class="flex flex-col items-center justify-center p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                            <i class="fas fa-globe text-lg text-green-400 mb-1"></i> www.salesruby.com/SLC2026
+                            <i class="fas fa-globe text-base sm:text-lg text-green-400 mb-1"></i> www.salesruby.com/SLC2026
                         </a>
                         <div class="flex flex-col items-center justify-center p-2 bg-gray-800 rounded-lg">
-                            <i class="fab fa-whatsapp text-lg text-green-400 mb-1"></i> 09070047684 / 07032580219
+                            <i class="fab fa-whatsapp text-base sm:text-lg text-green-400 mb-1"></i> 09070047684 / 07032580219
                         </div>
                         <a href="mailto:training@salesruby.com" class="flex flex-col items-center justify-center p-2 bg-gray-800 rounded-lg hover:bg-gray-700 transition">
-                            <i class="fas fa-envelope text-lg text-green-400 mb-1"></i> training@salesruby.com
+                            <i class="fas fa-envelope text-base sm:text-lg text-green-400 mb-1"></i> training@salesruby.com
                         </a>
                     </div>
                 </div>
@@ -421,54 +428,54 @@
 
     <!-- Inquiry Modals (Hidden by default) -->
     <div id="inquiry-prompt-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center backdrop-blur-sm no-print">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all">
-            <h3 class="text-2xl font-bold brand-black-text mb-4 text-center">Ready to Transform Your Sales?</h3>
-            <p class="text-gray-600 text-center mb-8">Would you like to visit our registration website or do you have some inquiries to make?</p>
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all">
+            <h3 class="text-xl sm:text-2xl font-bold brand-black-text mb-3 sm:mb-4 text-center">Ready to Transform Your Sales?</h3>
+            <p class="text-sm sm:text-base text-gray-600 text-center mb-6 sm:mb-8">Would you like to visit our registration website or do you have some inquiries to make?</p>
             <div class="flex flex-col space-y-3">
-                <a href="https://www.salesruby.com/SLC2026" target="_blank" onclick="closeModal('inquiry-prompt-modal')" class="w-full brand-green-bg hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors">
+                <a href="https://www.salesruby.com/SLC2026" target="_blank" onclick="closeModal('inquiry-prompt-modal')" class="w-full brand-green-bg hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg text-center transition-colors text-sm sm:text-base">
                     Visit Registration Site
                 </a>
-                <button onclick="openInquiryForm()" class="w-full bg-gray-100 hover:bg-gray-200 brand-black-text font-bold py-3 px-4 rounded-lg text-center transition-colors border border-gray-300 shadow-sm">
+                <button onclick="openInquiryForm()" class="w-full bg-gray-100 hover:bg-gray-200 brand-black-text font-bold py-3 px-4 rounded-lg text-center transition-colors border border-gray-300 shadow-sm text-sm sm:text-base">
                     Make Inquiries
                 </button>
-                <button onclick="closeModal('inquiry-prompt-modal')" class="text-sm text-gray-400 mt-2 hover:text-gray-600 font-medium">Maybe later</button>
+                <button onclick="closeModal('inquiry-prompt-modal')" class="text-xs sm:text-sm text-gray-400 mt-2 hover:text-gray-600 font-medium">Maybe later</button>
             </div>
         </div>
     </div>
 
     <div id="inquiry-form-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center backdrop-blur-sm no-print">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl relative">
-            <button onclick="closeModal('inquiry-form-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 focus:outline-none">
-                <i class="fas fa-times text-xl"></i>
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl relative">
+            <button onclick="closeModal('inquiry-form-modal')" class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-400 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-times text-lg sm:text-xl"></i>
             </button>
-            <h3 class="text-2xl font-bold brand-black-text mb-2">Send an Inquiry</h3>
-            <p class="text-sm text-gray-500 mb-6">Fill in your details and we'll connect with you via WhatsApp.</p>
+            <h3 class="text-xl sm:text-2xl font-bold brand-black-text mb-2">Send an Inquiry</h3>
+            <p class="text-xs sm:text-sm text-gray-500 mb-4 sm:mb-6">Fill in your details and we'll connect with you via WhatsApp.</p>
             
             <form id="slc-inquiry-form" onsubmit="submitInquiry(event)">
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="inq-name">Full Name</label>
-                    <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" id="inq-name" type="text" required placeholder="E.g. John Doe">
+                <div class="mb-3 sm:mb-4">
+                    <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-name">Full Name</label>
+                    <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" id="inq-name" type="text" required placeholder="E.g. John Doe">
                 </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="inq-email">Email Address</label>
-                    <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" id="inq-email" type="email" required placeholder="john@example.com">
+                <div class="mb-3 sm:mb-4">
+                    <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-email">Email Address</label>
+                    <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" id="inq-email" type="email" required placeholder="john@example.com">
                 </div>
-                <div class="mb-8">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="inq-location">Location</label>
+                <div class="mb-6 sm:mb-8">
+                    <label class="block text-gray-700 text-xs sm:text-sm font-bold mb-1 sm:mb-2" for="inq-location">Location</label>
                     <div class="relative">
-                        <select class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white" id="inq-location" required>
+                        <select class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white" id="inq-location" required>
                             <option value="" disabled selected>Select your location</option>
                             <option value="Lagos">Lagos</option>
                             <option value="Abuja">Abuja</option>
                             <option value="Others">Others</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
-                            <i class="fas fa-chevron-down text-sm"></i>
+                            <i class="fas fa-chevron-down text-xs sm:text-sm"></i>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="w-full flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5c] text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md">
-                    <i class="fab fa-whatsapp text-xl mr-2"></i> Send to WhatsApp
+                <button type="submit" class="w-full flex items-center justify-center bg-[#25D366] hover:bg-[#1ebd5c] text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md text-sm sm:text-base">
+                    <i class="fab fa-whatsapp text-lg sm:text-xl mr-2"></i> Send to WhatsApp
                 </button>
             </form>
         </div>
@@ -476,27 +483,69 @@
 
     <!-- Download Modal -->
     <div id="download-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center backdrop-blur-sm no-print">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl relative">
-            <button onclick="closeModal('download-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 focus:outline-none">
-                <i class="fas fa-times text-xl"></i>
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl relative">
+            <button onclick="closeModal('download-modal')" class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-400 hover:text-gray-700 focus:outline-none">
+                <i class="fas fa-times text-lg sm:text-xl"></i>
             </button>
-            <h3 class="text-2xl font-bold brand-black-text mb-2 text-center">Download Brochure</h3>
-            <p class="text-sm text-gray-500 mb-6 text-center">Select your industry to download the specific PDF brochure.</p>
+            <h3 class="text-xl sm:text-2xl font-bold brand-black-text mb-2 text-center">Download Brochure</h3>
+            <p class="text-xs sm:text-sm text-gray-500 mb-5 sm:mb-6 text-center">Select your industry to download the specific PDF brochure.</p>
             
             <div class="flex flex-col space-y-3">
-                <a href="Luxury, Real Estate & Automobile2.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
-                    <i class="fas fa-car text-green-500 mr-3 text-lg w-6 text-center"></i> Luxury, Real Estate & Automobile
+                <a href="brochure/Luxury_Real_Estate_Automobile.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-3 sm:px-4 rounded-lg text-left transition-colors flex items-center text-xs sm:text-sm">
+                    <i class="fas fa-car text-green-500 mr-2 sm:mr-3 text-base sm:text-lg w-5 sm:w-6 text-center"></i> Luxury, Real Estate & Automobile
                 </a>
-                <a href="B2B, Technology & Oil and Gas1.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
-                    <i class="fas fa-industry text-green-500 mr-3 text-lg w-6 text-center"></i> B2B, Technology & Oil and Gas
+                <a href="brochure/B2B_Technology_Oil_Gas.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-3 sm:px-4 rounded-lg text-left transition-colors flex items-center text-xs sm:text-sm">
+                    <i class="fas fa-industry text-green-500 mr-2 sm:mr-3 text-base sm:text-lg w-5 sm:w-6 text-center"></i> B2B, Technology & Oil and Gas
                 </a>
-                <button onclick="downloadGeneratedPDF('fmcg')" class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
-                    <i class="fas fa-shopping-cart text-green-500 mr-3 text-lg w-6 text-center"></i> FMCG, Retail & Pharmaceuticals
-                </button>
-                <button onclick="downloadGeneratedPDF('finance')" class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-4 rounded-lg text-left transition-colors flex items-center">
-                    <i class="fas fa-chart-pie text-green-500 mr-3 text-lg w-6 text-center"></i> Financial Services & Insurance
-                </button>
+                <a href="brochure/FMCG_Retail_Pharmaceuticals.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-3 sm:px-4 rounded-lg text-left transition-colors flex items-center text-xs sm:text-sm">
+                    <i class="fas fa-shopping-cart text-green-500 mr-2 sm:mr-3 text-base sm:text-lg w-5 sm:w-6 text-center"></i> FMCG, Retail & Pharmaceuticals
+                </a>
+                <a href="brochure/Financial_Services_Insurance.pdf" download class="w-full bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-500 text-gray-800 font-semibold py-3 px-3 sm:px-4 rounded-lg text-left transition-colors flex items-center text-xs sm:text-sm">
+                    <i class="fas fa-chart-pie text-green-500 mr-2 sm:mr-3 text-base sm:text-lg w-5 sm:w-6 text-center"></i> Financial Services & Insurance
+                </a>
             </div>
+        </div>
+    </div>
+
+    <!-- Paginated View Modal (App-like full screen view) -->
+    <div id="paginated-modal" class="fixed inset-0 z-[80] bg-gray-900 hidden flex-col items-center justify-center overflow-hidden no-print">
+        
+        <!-- Floating Close Button -->
+        <button onclick="closePaginatedView()" class="absolute top-4 right-4 text-white text-xl sm:text-3xl hover:text-gray-300 z-[100] transition-colors bg-black/50 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Responsive Left Arrow -->
+        <div class="absolute bottom-[90px] sm:top-1/2 left-4 sm:left-6 transform sm:-translate-y-1/2 z-[100]">
+            <button onclick="changePage(-1)" class="text-white text-lg sm:text-3xl hover:text-gray-300 bg-black/60 p-3 sm:p-5 rounded-full transition-colors shadow-lg flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <!-- Responsive Right Arrow -->
+        <div class="absolute bottom-[90px] sm:top-1/2 right-4 sm:right-6 transform sm:-translate-y-1/2 z-[100]">
+            <button onclick="changePage(1)" class="text-white text-lg sm:text-3xl hover:text-gray-300 bg-black/60 p-3 sm:p-5 rounded-full transition-colors shadow-lg flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="w-full h-full flex flex-col items-center overflow-y-auto pb-40 pt-16 sm:pt-10 px-0 sm:px-24" id="paginated-scroll-area">
+            <div id="paginated-container" class="w-full max-w-4xl transition-opacity duration-300 px-2 sm:px-0">
+                <!-- Page content cloned here via JS -->
+            </div>
+        </div>
+
+        <!-- Page Indicator positioned out of the way -->
+        <div class="absolute bottom-[100px] sm:bottom-6 left-1/2 transform -translate-x-1/2 bg-black/80 text-white px-5 sm:px-6 py-2 rounded-full font-bold tracking-widest text-xs sm:text-sm z-[100] shadow-xl border border-white/10 pointer-events-none">
+            PAGE <span id="current-page-indicator">1</span> / 4
+        </div>
+    </div>
+
+    <!-- Fixed Bottom Industry Tabs (App Style Bottom Nav) -->
+    <div class="fixed bottom-0 left-0 w-full bg-white shadow-[0_-10px_30px_rgba(0,0,0,0.1)] z-[90] py-2 sm:py-3 px-2 sm:px-4 no-print border-t border-gray-200">
+        <div class="max-w-6xl mx-auto flex overflow-x-auto hide-scrollbar justify-start md:justify-center items-center space-x-2" id="tabs-container">
+            <!-- Tabs rendered via JS -->
         </div>
     </div>
 
@@ -631,12 +680,12 @@
             industries.forEach(ind => {
                 const isActive = ind.id === activeIndustryId;
                 const btn = document.createElement('button');
-                btn.className = `whitespace-nowrap px-4 py-2 mr-2 rounded-full text-sm font-semibold transition-colors border ${
+                btn.className = `whitespace-nowrap px-3 sm:px-5 py-2 sm:py-2.5 mr-2 rounded-full text-xs sm:text-sm font-semibold transition-colors border flex-shrink-0 ${
                     isActive 
                     ? 'border-green-500 bg-green-50 text-green-700 shadow-sm' 
                     : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`;
-                btn.innerHTML = `<i class="fas fa-industry mr-2 opacity-50"></i> ${ind.title}`;
+                btn.innerHTML = `<i class="fas fa-industry mr-1.5 sm:mr-2 opacity-50"></i> ${ind.title}`;
                 btn.onclick = () => selectIndustry(ind.id);
                 container.appendChild(btn);
             });
@@ -652,14 +701,20 @@
             document.getElementById('cohort-title').innerText = ind.title;
             
             const ul = document.getElementById('cohort-bullets');
-            ul.innerHTML = ind.bullets.map(b => `<li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i> <span class="text-gray-700">${b}</span></li>`).join('');
+            ul.innerHTML = ind.bullets.map(b => `<li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2 sm:mr-3 flex-shrink-0"></i> <span class="text-gray-700">${b}</span></li>`).join('');
             
-            document.getElementById('cohort-paragraph').innerHTML = ind.paragraph; // Uses innerHTML to render bold tags and line breaks
+            document.getElementById('cohort-paragraph').innerHTML = ind.paragraph; 
             
             document.getElementById('agenda-table-header').innerText = `Topic (${ind.title})`;
             document.getElementById('agenda-1030').innerText = ind.agenda['1030'];
             document.getElementById('agenda-1130').innerText = ind.agenda['1130'];
             document.getElementById('agenda-1230').innerText = ind.agenda['1230'];
+
+            // If paginated view is open, seamlessly refresh it
+            const paginatedModal = document.getElementById('paginated-modal');
+            if(paginatedModal && !paginatedModal.classList.contains('hidden')){
+                renderPaginatedPage();
+            }
         }
 
         function selectIndustry(id) {
@@ -679,30 +734,77 @@
 
         // Print functionality
         function printBrochure() {
-            // Update document title briefly so the print dialog suggests a good filename
             const ind = industries.find(i => i.id === activeIndustryId);
             const originalTitle = document.title;
             document.title = `SLC_2026_Brochure_${ind.title.replace(/[^a-z0-9]/gi, '_')}`;
             window.print();
-            // Restore title
             setTimeout(() => { document.title = originalTitle; }, 100);
         }
 
-        // Auto-Generate the remaining PDFs
-        function downloadGeneratedPDF(id) {
-            closeModal('download-modal'); // Close the pop-up
-            selectIndustry(id);           // Instantly update the HTML to the chosen industry
+        // --- Paginated View Logic ---
+        let currentBrochurePage = 0;
+        let totalBrochurePages = 0;
+
+        function openPaginatedView() {
+            const modal = document.getElementById('paginated-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
             
-            // Wait 300ms for the DOM to update, then trigger the Save As PDF engine
-            setTimeout(() => {
-                printBrochure(); 
-            }, 300);
+            totalBrochurePages = document.querySelectorAll('#brochure-content .brochure-page').length;
+            currentBrochurePage = 0;
+            renderPaginatedPage();
+        }
+
+        function closePaginatedView() {
+            const modal = document.getElementById('paginated-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            
+            // Clear cloned content
+            document.getElementById('paginated-container').innerHTML = '';
+        }
+
+        function changePage(direction) {
+            currentBrochurePage += direction;
+            if (currentBrochurePage < 0) currentBrochurePage = 0;
+            if (currentBrochurePage >= totalBrochurePages) currentBrochurePage = totalBrochurePages - 1;
+            renderPaginatedPage();
+        }
+
+        function renderPaginatedPage() {
+            const pages = document.querySelectorAll('#brochure-content .brochure-page');
+            if(pages.length === 0) return;
+            
+            const container = document.getElementById('paginated-container');
+            container.innerHTML = ''; // Clear current
+            
+            // Clone the required page
+            const clonedPage = pages[currentBrochurePage].cloneNode(true);
+            
+            // Modify cloned classes dynamically so it functions beautifully as an app view instead of a fixed desktop scale
+            clonedPage.style.margin = '0 auto';
+            clonedPage.style.boxShadow = '0 10px 40px -10px rgba(0, 0, 0, 0.5)';
+            clonedPage.classList.remove('mb-8', 'mb-2rem', 'min-h-[1123px]', 'md:min-h-[1123px]'); 
+            clonedPage.classList.add('mb-4', 'rounded-xl', 'min-h-full', 'w-full');
+            
+            container.appendChild(clonedPage);
+            
+            // Update indicator
+            document.getElementById('current-page-indicator').innerText = (currentBrochurePage + 1);
+            
+            // Scroll popup to top seamlessly
+            document.getElementById('paginated-scroll-area').scrollTop = 0;
         }
 
         // Initial render
         window.onload = () => {
             renderTabs();
             updateContent();
+            
+            // Add padding so bottom floating tabs don't overlap scrolling content
+            document.body.style.paddingBottom = '80px'; 
         };
     </script>
 </body>
